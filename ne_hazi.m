@@ -18,7 +18,7 @@ plot(abs(fft(Data)));
 % 867423000/fs=1.9669e+04;
 % 8921/fs=2.0229e+04
 %%
-sound(Data,fs);
+% sound(Data,fs);
 %%
 x=0:(length(Data)-1);
 %%
@@ -35,11 +35,29 @@ signal=exp(1i*8930*2*pi*x/length(Data));    %b13_br_att.i16
 mixed=Data.*signal';
 
 lpfMix=lowpass(mixed,10,fs);
-% figure(1);
-% plot(real(lpfMix));
+figure(1);
+plot(real(lpfMix));
 hold on;
 plot(imag(lpfMix));
 % figure(2);
 % plot(angle(mixed));
 
 %bitsebesség: 1 bit/430 órajel
+
+%%
+incVal=430;
+barker=[1 1 1 1 1 -1 -1 1 1 -1 1 -1 1];
+incBarker=[];
+for inc=1:length(barker)
+    incBarker=[incBarker barker(inc)*ones(1,incVal)];
+end
+
+%%
+detect=xcorr(incBarker,lpfMix);
+% detect=xcorr(lpfMix,incBarker);
+figure(3)
+plot(real(detect));
+hold on;
+plot(imag(detect));
+figure(4)
+plot(abs(detect));
