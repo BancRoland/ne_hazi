@@ -2,7 +2,7 @@ clear all;
 close all;
 
 %% beolvasás
-filename='b13_br_att.i16';
+filename='b13_br.i16';
 fileID = fopen(filename, 'r', 'ieee-le');
 if fileID == -1, error('Cannot open file: %s', filename); end
 format = 'int16';
@@ -28,8 +28,8 @@ x=0:(length(Data)-1);
 %%
 % signal=sin(8921*2*pi*x/length(Data));
 
-% signal=exp(1i*8921*2*pi*x/length(Data)); %b13_br.i16
-signal=exp(1i*8930*2*pi*x/length(Data));    %b13_br_att.i16
+signal=exp(1i*8921*2*pi*x/length(Data)); %b13_br.i16
+% signal=exp(1i*8930*2*pi*x/length(Data));    %b13_br_att.i16
 % plot(signal(1:fs/100));
 % hold on;
 % plot(Data(1:fs/100));
